@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { act } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Input, Stack } from '@chakra-ui/react';
 
@@ -10,8 +10,11 @@ const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
   const { register, handleSubmit, reset } = useForm<{ text: string }>();
 
   const onSubmit = (data: { text: string }) => {
-    addTodo(data.text);
-    reset();
+    act(() => {
+      addTodo(data.text);
+      reset();
+    });
+    
   };
 
   return (
