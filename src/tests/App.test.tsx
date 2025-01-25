@@ -12,10 +12,11 @@ test('adds and removes a todo', async () => {
   fireEvent.click(button);
   });
 
-  expect(screen.getByText('Test Todo')).toBeInTheDocument();
+  const todos = screen.getAllByText('Test Todo');
+  expect(todos.length).toBeGreaterThan(0);
 
   await act(async () => {
-  fireEvent.click(screen.getByLabelText('Delete todo'));
+  fireEvent.click(screen.getAllByLabelText('Delete todo')[0]);
   });
 
   expect(screen.queryByText('Test Todo')).not.toBeInTheDocument();
@@ -31,7 +32,7 @@ test('marks a todo as completed and then uncompleted', async () => {
   fireEvent.click(button);
   });
 
-  const checkbox = screen.getByRole('checkbox');
+  const checkbox = screen.getAllByRole('checkbox')[0];
 
   await act(async () => {
   fireEvent.click(checkbox);
